@@ -174,11 +174,14 @@ void editClass(struct st_class* c[], int csize){
             printf("> Enter new grading(1:Grade, 2: P/F) > ");
             scanf("%d", &(c[i]->grading));
 
+            printf("> Modified.\n");
+            break;
+        }
+        else {
+            printf("The code you entered doesn't exist!\n");
             break;
         }
     }
-
-	printf("> Modified.\n");
 }
 
 
