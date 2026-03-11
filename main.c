@@ -138,22 +138,9 @@ int addNewClass(struct st_class* c[], int csize){
 
 	struct st_class* p = (struct st_class*)malloc(sizeof(struct st_class));
 
-    int count=0;
-	FILE* file;
-
-	file=fopen("classes.txt", "r");
-
-	while(!feof(file)){
-		c[count] = (struct st_class*)malloc(sizeof(struct st_class));
-		int r = fscanf(file, "%d", &(c[count]->code));
-		if(r < 1) break;
-		count++;
-	}
-	fclose(file);
-
 	printf(">> code number > ");
 	scanf("%d", &(p->code));
-    for(int i = 0; i < count; i++) {
+    for(int i = 0; i < csize; i++) {
         if(p->code == c[i]->code) {
             printf("It's already added !\n");
             return csize;
@@ -176,21 +163,22 @@ void editClass(struct st_class* c[], int csize){
 	printf(">> Enter a code of class > ");
 	scanf("%d", &code);
 
-	
-	// You must complete this section.
+    for(int i = 0; i < csize; i++) {
+        if(code == c[i]->code) {
+            printf("> Current: [%d] %s [credits %d - %s]\n",c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
 
+            printf("> Enter new class name > ");
+            scanf("%s", c[i]->name);
+            printf("> Enter new credits > ");
+            scanf("%d", &(c[i]->unit));
+            printf("> Enter new grading(1:Grade, 2: P/F) > ");
+            scanf("%d", &(c[i]->grading));
 
-	
-	printf("> Current: [%d] %s [credits %d - %s]\n",p->code, p->name, p->unit, kname[p->grading-1]);
-	printf("> Enter new class name > ");
-	scanf("%s", p->name);
-	printf("> Enter new credits > ");
-	scanf("%d", &(p->unit));
-	printf("> Enter new grading(1:Grade, 2: P/F) > ");
-	scanf("%d", &(p->grading));
+            break;
+        }
+    }
 
 	printf("> Modified.\n");
-
 }
 
 
