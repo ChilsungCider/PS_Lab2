@@ -40,6 +40,7 @@ int main(void) {
 	srand(time(0));
 	int count = loadData(classes); // -> segmentation fault
     // printf("debug\n"); // for debug
+    
 	printf("> Load %d classes.\n", count);
 
 	while(1){
