@@ -40,7 +40,7 @@ int main(void) {
 	srand(time(0));
 	int count = loadData(classes); // -> segmentation fault
     // printf("debug\n"); // for debug
-    
+
 	printf("> Load %d classes.\n", count);
 
 	while(1){
@@ -138,10 +138,29 @@ int addNewClass(struct st_class* c[], int csize){
 
 	struct st_class* p = (struct st_class*)malloc(sizeof(struct st_class));
 
+    int count=0;
+	FILE* file;
+
+	file=fopen("classes.txt", "r");
+
+	while(!feof(file)){
+		c[count] = (struct st_class*)malloc(sizeof(struct st_class));
+		int r = fscanf(file, "%d", &(c[count]->code));
+		if(r < 1) break;
+		count++;
+	}
+	fclose(file);
+
 	printf(">> code number > ");
 	scanf("%d", &(p->code));
+    for(int i = 0; i < count; i++) {
+        if(p->code == c[i]->code) {
+            printf("It's already added !\n");
+            return csize;
+        }
+    }
 	printf(">> class name > ");
-	scanf("%29s", p->name);
+	scanf("%s", p->name);
 	printf(">> credits > ");
 	scanf("%d", &(p->unit));
 	printf(">> grading (1: A+~F, 2: P/F) > ");
