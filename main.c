@@ -255,20 +255,40 @@ int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
 	struct st_class* p;
 	int count = 0;
+	int sum = 0;
+
 	for(int i = 0; i < msize; i++) {
 		for(int j = 0; j < csize; j++) {
 			if(c[j]->code == my[i]) {
 				p = c[j];
 				printf("%d. [%d] %s [credit %d - %s]\n", i + 1, p->code, p->name, p->unit, kname[p->grading-1]);
+				sum += p->unit;
 			}
 		}
 		p = NULL;
 	}
+	printf("All : %d credits\n", sum);
 }
 
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
+	struct st_class* p;
+	int sum = 0;
+	FILE* file;
+	file = fopen("my_classes.txt", "w");
 
+	fprintf(file, "My Classes\n");
 
+	for(int i = 0; i < msize; i++) {
+		for(int j = 0; j < csize; j++) {
+			if(c[j]->code == my[i]) {
+				p = c[j];
+				fprintf(file, "%d. [%d] %s [credit %d - %s]\n", i + 1, p->code, p->name, p->unit, kname[p->grading-1]);
+				sum += p->unit;
+			}
+		}
+		p = NULL;
+	}
+	fprintf(file, "All : %d classes, %d credits\n", msize, sum);
 
-	
+	fclose(file);
 }
