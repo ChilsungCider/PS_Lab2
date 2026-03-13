@@ -168,28 +168,41 @@ int addNewClass(struct st_class* c[], int csize){
 
 void editClass(struct st_class* c[], int csize){
 	struct st_class* p;
+
 	int code;
-	printf(">> Enter a code of class > ");
-	scanf("%d", &code);
 
-    for(int i = 0; i < csize; i++) {
-        if(code == c[i]->code) {
-            printf("> Current: [%d] %s [credits %d - %s]\n",c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
+	int right = 0;
 
-            printf("> Enter new class name > ");
-            scanf("%s", c[i]->name);
-            printf("> Enter new credits > ");
-            scanf("%d", &(c[i]->unit));
-            printf("> Enter new grading(1:Grade, 2: P/F) > ");
-            scanf("%d", &(c[i]->grading));
+    while(right == 0) {
+        printf(">> Enter a code of class > ");
+		scanf("%d", &code);
 
-            printf("> Modified.\n");
-            break;
+		right = 1;
+
+		for(int i = 0; i < csize; i++) {
+            if(code == c[i]->code) {
+				p = c[i];
+                printf("> Current: [%d] %s [credits %d - %s]\n", p->code, p->name, p->unit, kname[p->grading-1]);
+
+				printf("> Enter new class name > ");
+				scanf("%s", (p->name));
+				printf("> Enter new credits > ");
+				scanf("%d", &(p->unit));
+				printf("> Enter new grading(1:Grade, 2: P/F) > ");
+				scanf("%d", &(p->grading));
+
+				printf("> Modified.\n");
+				right = 1;
+				break;
+            }
+			else {
+				right = 0;
+			}
         }
-        else {
-            printf("The code you entered doesn't exist!\n");
-            break;
-        }
+
+		if (right == 0) {
+			printf("No such class.\n");
+		}
     }
 }
 
@@ -197,20 +210,60 @@ void editClass(struct st_class* c[], int csize){
 // You must make all these functions.
 
 int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
+	struct st_class* p;
+	int code;
+	int index = 3;
+	int right = 0;
+	int count = 0;
 
-    printf(">> Enter a class code > ");
+	while(right == 0 || right == 2) {
+		printf(">> Enter a class code > ");
+		scanf("%d", &code);
 
-    // 선택한 과목코드 내용 출력
-    // printf("Add more?(1:Yes 2:No) > ");
+		for(int i = 0; i < csize; i++) {
+            if(code == c[i]->code) {
+				p = c[i];
+				my[count] = p->code;
+				printf(">> [%d] %s [credit %d - %s]\n", p->code, p->name, p->unit, kname[p->grading-1]);
+                count++;
+				while(index != 1 || index != 2) {
+					printf(">> Add more?(1:Yes 2:No) > ");
+					scanf("%d", &index);
+					if (index == 1) {
+						right = 0;
+						break;
+					}
+					else if (index == 2) {
+						right = 1;
+						break;
+					}
+					else continue;
+				}
+				break;
+            }
+			else right = 2;
+        }
+
+		if (right == 2) {
+			printf("No such code of class.\n");
+		}
+	}
 	
-	return 0;
+	return count;
 }
 
 void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
-
-
-	
-
+	struct st_class* p;
+	int count = 0;
+	for(int i = 0; i < msize; i++) {
+		for(int j = 0; j < csize; j++) {
+			if(c[j]->code == my[i]) {
+				p = c[j];
+				printf("%d. [%d] %s [credit %d - %s]\n", i + 1, p->code, p->name, p->unit, kname[p->grading-1]);
+			}
+		}
+		p = NULL;
+	}
 }
 
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
