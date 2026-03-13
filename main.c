@@ -273,6 +273,9 @@ void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
 	struct st_class* p;
 	int sum = 0;
+	int grade_sum = 0;
+	int pf_sum = 0;
+
 	FILE* file;
 	file = fopen("my_classes.txt", "w");
 
@@ -284,11 +287,13 @@ void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
 				p = c[j];
 				fprintf(file, "%d. [%d] %s [credit %d - %s]\n", i + 1, p->code, p->name, p->unit, kname[p->grading-1]);
 				sum += p->unit;
+				if(p->grading == 1) grade_sum += p->unit;
+				if(p->grading == 2) pf_sum += p->unit;
 			}
 		}
 		p = NULL;
 	}
-	fprintf(file, "All : %d classes, %d credits\n", msize, sum);
+	fprintf(file, "All : %d classes, %d credits (A+~F %d credits, P/F %d credits)\n", msize, sum, grade_sum, pf_sum);
 
 	fclose(file);
 }
