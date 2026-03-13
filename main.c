@@ -138,14 +138,23 @@ int addNewClass(struct st_class* c[], int csize){
 
 	struct st_class* p = (struct st_class*)malloc(sizeof(struct st_class));
 
-	printf(">> code number > ");
-	scanf("%d", &(p->code));
-    for(int i = 0; i < csize; i++) {
-        if(p->code == c[i]->code) {
-            printf("It's already added !\n");
-            return csize;
+    int right = 0;
+
+    while(right == 0) {
+        printf(">> code number > ");
+	    scanf("%d", &(p->code));
+
+		right = 1;
+
+        for(int i = 0; i < csize; i++) {
+            if(p->code == c[i]->code) {
+                printf("Code duplicated! Retry.\n");
+                right = 0;
+				break;
+            }
         }
     }
+    
 	printf(">> class name > ");
 	scanf("%s", p->name);
 	printf(">> credits > ");
@@ -189,8 +198,10 @@ void editClass(struct st_class* c[], int csize){
 
 int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 
+    printf(">> Enter a class code > ");
 
-
+    // 선택한 과목코드 내용 출력
+    // printf("Add more?(1:Yes 2:No) > ");
 	
 	return 0;
 }
