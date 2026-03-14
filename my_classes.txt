@@ -1,12 +1,8 @@
 My Classes
-1. [109] ICT [credit 3 - A+~F]
+1. [101] C++ [credit 3 - A+~F]
 2. [110] Reading [credit 1 - P/F]
-3. [111] Korean [credit 3 - A+~F]
-4. [113] Ehtics [credit 1 - P/F]
-5. [201] EngineeringBasic [credit 3 - A+~F]
-6. [202] ComputerArchitecture [credit 2 - A+~F]
-7. [203] WebService [credit 3 - A+~F]
-8. [204] ProgramingStudio [credit 2 - A+~F]
-9. [205] Java [credit 3 - A+~F]
-10. [206] DS [credit 3 - A+~F]
-All : 10 classes, 24 credits (A+~F 22 credits, P/F 2 credits)
+3. [201] EngineeringBasic [credit 3 - A+~F]
+4. [205] Java [credit 3 - A+~F]
+5. [208] Project [credit 3 - P/F]
+6. [204] ProgramingStudio [credit 2 - A+~F]
+All : 6 classes, 15 credits (A+~F 11 credits, P/F 4 credits)
