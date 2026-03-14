@@ -273,7 +273,6 @@ int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 
 void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
 	struct st_class* p;
-	int count = 0;
 	int sum = 0;
 
 	for(int i = 0; i < msize; i++) {
