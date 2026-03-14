@@ -126,21 +126,37 @@ void editClass(struct st_class* c[], int csize){
 int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 	struct st_class* p;
 	int code;
-	int index = 3;
 	int right = 0;
 	int count = 0;
 
-	while(right == 0 || right == 2) {
+	while(right != 1) {
+        if(count == 10) {
+            printf("You can no longer apply because you have already applied for 10 courses!\n");
+            break;
+        }
 		printf(">> Enter a class code > ");
 		scanf("%d", &code);
 
 		for(int i = 0; i < csize; i++) {
+            right = 0;
+
+            for(int j = 0; j < msize + count; j++) {
+                if(my[j] == code) {
+                    right = 3;
+                    break;
+                }
+            }
+            if (right == 3)
+                break;
+
             if(code == c[i]->code) {
 				p = c[i];
 				my[count] = p->code;
 				printf(">> [%d] %s [credit %d - %s]\n", p->code, p->name, p->unit, kname[p->grading-1]);
                 count++;
-				while(index != 1 || index != 2) {
+
+                int index = 3;
+				while(index != 1 && index != 2) {
 					printf(">> Add more?(1:Yes 2:No) > ");
 					scanf("%d", &index);
 					if (index == 1) {
@@ -153,7 +169,7 @@ int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 					}
 					else continue;
 				}
-				break;
+                break;
             }
 			else right = 2;
         }
@@ -161,6 +177,9 @@ int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 		if (right == 2) {
 			printf("No such code of class.\n");
 		}
+        else if (right == 3) {
+            printf("The class code is already applied!\n");
+        }
 	}
 	
 	return count;

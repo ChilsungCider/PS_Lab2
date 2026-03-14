@@ -1,6 +1,7 @@
 *.txt
 *.pdf
 main
+not_make_ver/
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++,macos,visualstudiocode,microsoftoffice
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,macos,visualstudiocode,microsoftoffice
@@ -77,6 +78,7 @@ Temporary Items
 
 # Word temporary
 ~$*.doc*
+*.docx
 
 # Word Auto Backup File
 Backup of *.doc*
